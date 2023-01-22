@@ -21,7 +21,8 @@ export const Timer: React.FC<TimerProps> = (props) => {
         setTime(new Date());
     }
 
-    function getIndex(cityOrCountry: string): number {
+    function getIndex(cityOrCountry: string): number
+     {
         return timeZones.findIndex(elem => JSON.stringify(elem).includes("\"" + cityOrCountry + "\""))
   
     }
@@ -31,7 +32,8 @@ export const Timer: React.FC<TimerProps> = (props) => {
         return () => clearInterval(interval);
     }, [])
 
-    function processInput(cityOrCountry: string): string {
+    function processInput(cityOrCountry: string): string
+     {
         cityOrCountry = cityOrCountry.toLowerCase();
         cityOrCountry = cityOrCountry.charAt(0).toUpperCase() + cityOrCountry.slice(1)
         let res: string = '';
