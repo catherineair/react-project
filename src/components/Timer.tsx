@@ -1,57 +1,57 @@
-import { BlockList } from "net";
+
 import React from "react";
-
 import timeZones from "../time-zones";
+import { Input } from "./Input";
 
-    type TimerProps = 
-{
+
+type TimerProps = {
     cityOrCountry: string;
-    regularity: number;
-}
+    inputId: string;
 
-    export const Timer: React.FC<TimerProps> = (props) => 
-{
-    const timeZoneIndex:number = getIndex(props.cityOrCountry);
+};
 
-    const timeZone: string = timeZones[timeZoneIndex].name;
+export const Timer: React.FC<TimerProps> = (props) => {
+    const [timeZoneInd, setTimeInd] = React.useState(getIndex(props.cityOrCountry));
+    let timeZone: string = timeZones[timeZoneInd].name;
+    const [newTimeName, setTimeName] = React.useState(props.cityOrCountry);
+    const [time, setTime] = React.useState<Date>(new Date());
 
-    const [time, setTime] = React.useState(new Date());
-
-    function getLocalIndex(): number
-{
-    return timeZones.findIndex( elem => Intl.DateTimeFormat().resolvedOptions().timeZone === elem.name)
-}
-
-    function tick() 
-    {
-        console.log("tick");
+    function tick() {
+        console.log("tick-tack");
         setTime(new Date());
     }
 
-    React.useEffect(()=>{
+    function getIndex(cityOrCountry: string): number {
+        return timeZones.findIndex(elem => JSON.stringify(elem).includes("\"" + cityOrCountry + "\""))
+  
+    }
+
+    React.useEffect(() => {
         const interval = setInterval(tick, 1000);
-        return ()=>clearInterval(interval);
+        return () => clearInterval(interval);
     }, [])
-    
-    return <div>
-        <h3>Time in time zone {timeZone}</h3>
-        <label style={{display: "block",
-         textAlign: "center", color: "blue", fontSize: "2em"}}>Time {time.toLocaleTimeString(undefined,{timeZone})}</label>
-    </div>
-}
 
-    function getIndex(cityOrCountry: string): number
-{
-    let index = timeZones.findIndex( elem =>
-        {
-            return JSON.stringify(elem).includes(cityOrCountry);
+    function processInput(cityOrCountry: string): string {
+        cityOrCountry = cityOrCountry.toLowerCase();
+        cityOrCountry = cityOrCountry.charAt(0).toUpperCase() + cityOrCountry.slice(1)
+        let res: string = '';
+        const index: number = getIndex(cityOrCountry);
+        if (index < 0) {
+            res = "Error, please enter a valid city or country";
+        } else {
+            timeZone = timeZones[index].name;
+            setTimeName(cityOrCountry);
+            setTimeInd(index)
         }
-        )
-        
-        return index > -1 ? index : getLocalIndex();
-}
+        return res;
+    }
 
-    function getLocalIndex(): number
-{
-    return timeZones.findIndex( elem => Intl.DateTimeFormat().resolvedOptions().timeZone === elem.name)
+
+    return <div>
+        <h3 > Time in time zone {newTimeName} </h3>
+        <label style={{ display: "block", textAlign: "center", fontSize: "2em" }}>
+            Time {time.toLocaleTimeString(undefined, { timeZone })}
+        </label>
+        <Input inputId={props.inputId} placeholderText="Enter city or country" inputProcess={processInput} />
+    </div >
 }
