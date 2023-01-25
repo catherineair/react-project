@@ -1,33 +1,33 @@
-
 import React from "react";
 import timeZones from "../time-zones";
 import { Input } from "./Input";
+// const indIsrael: number = 195;
 
-
-type TimerProps = {
+type TimerProps = 
+{
     cityOrCountry: string;
-    inputId: string;
-
 };
 
-export const Timer: React.FC<TimerProps> = (props) => {
+export const Timer: React.FC<TimerProps> = (props) => 
+{
     const [timeZoneInd, setTimeInd] = React.useState(getIndex(props.cityOrCountry));
     let timeZone: string = timeZones[timeZoneInd].name;
     const [newTimeName, setTimeName] = React.useState(props.cityOrCountry);
     const [time, setTime] = React.useState<Date>(new Date());
 
-    function tick() {
+    function tick() 
+    {
         console.log("tick-tack");
         setTime(new Date());
     }
 
-    function getIndex(cityOrCountry: string): number
-     {
+    function getIndex(cityOrCountry: string): number 
+    {
         return timeZones.findIndex(elem => JSON.stringify(elem).includes("\"" + cityOrCountry + "\""))
-  
     }
 
-    React.useEffect(() => {
+    React.useEffect(() => 
+    {
         const interval = setInterval(tick, 1000);
         return () => clearInterval(interval);
     }, [])
@@ -38,13 +38,17 @@ export const Timer: React.FC<TimerProps> = (props) => {
         cityOrCountry = cityOrCountry.charAt(0).toUpperCase() + cityOrCountry.slice(1)
         let res: string = '';
         const index: number = getIndex(cityOrCountry);
-        if (index < 0) {
+        if (index < 0)
+        {
             res = "Error, please enter a valid city or country";
-        } else {
+
+        } else 
+        {
             timeZone = timeZones[index].name;
             setTimeName(cityOrCountry);
             setTimeInd(index)
         }
+        
         return res;
     }
 
@@ -54,6 +58,6 @@ export const Timer: React.FC<TimerProps> = (props) => {
         <label style={{ display: "block", textAlign: "center", fontSize: "2em" }}>
             Time {time.toLocaleTimeString(undefined, { timeZone })}
         </label>
-        <Input inputId={props.inputId} placeholderText="Enter city or country" inputProcess={processInput} />
+        <Input inputProcess={processInput}  placeHolder={""} />
     </div >
 }

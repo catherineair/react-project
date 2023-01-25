@@ -1,37 +1,41 @@
 import React, { useEffect } from "react";
 import { Alert } from "./Alert";
 
-type InputProps = {
-    inputId: string;
-    inputProcess: (value: string) => string;
-    placeholderText: string;
-}
 
-export const Input: React.FC<InputProps> = ({ inputId, inputProcess, placeholderText }) => {
+    type InputProps = 
+    {
+    inputProcess: (value: string) => string;
+    placeHolder: string;
+    }
+
+    export const Input: React.FC<InputProps> = ({placeHolder, inputProcess }) => 
+    {
     let inputElement: HTMLInputElement | null;
     const [message, setMessage] = React.useState('');
+    const [inputId] = React.useState(Math.round(Math.random() * 100000000) + '');
 
-    function processClick(): void {
+
+    function processClick(): void 
+    {
         setMessage('');
         const messageRes: string = inputProcess(inputElement!.value);
-        if (messageRes == '') {
+        if (messageRes == '') 
+        {
             inputElement!.value = '';
-        } else {
+        } 
+        else 
+        {
             setMessage(messageRes);
         }
     }
-    function getRandomId(min: number, max: number): string {
-        let result: string;
-        result = "" + Math.floor(Math.random() * (max - min) + min);
-        return inputId = result;
-    }
-
-    React.useEffect(() => {
+   
+    React.useEffect(() => 
+    {
         inputElement = document.getElementById(inputId) as HTMLInputElement;
     })
 
     return <div>
-        <input id={inputId} placeholder={placeholderText} />
+        <input id={inputId} placeholder={placeHolder} />
         <button onClick={processClick}>click</button>
         {message && <Alert type={"error"} message={message} />}
     </div>

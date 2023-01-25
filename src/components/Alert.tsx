@@ -5,7 +5,8 @@ type AlertProps = {
     message: string;
 }
 
-export const Alert: React.FC<AlertProps> = ({ type, message }) => {
+export const Alert: React.FC<AlertProps> = ({ type, message }) => 
+{
     let backGround: "red" | "green" | "yelow";
     switch (type) {
         case "warn": backGround = "yelow";
