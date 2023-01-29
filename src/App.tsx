@@ -1,57 +1,21 @@
-import React from 'react';
-import { Timer } from './components/Timer';
-import { Input } from './components/Input';
+import React from "react";
+import { getRandomNumber } from "./utils/random";
+import { getRandomMatrix } from "./utils/random";
+import { getRandomArrayElement } from "./utils/random";
+import { getRandomDate } from "./utils/random";
+function App() {
+  console.log(getRandomNumber(5, 10));
+  console.log(getRandomNumber(5, 10, false, true));
+  console.log(getRandomNumber(10, 5));
 
+  const matrix = getRandomMatrix(3, 4, 5, 10);
+  console.log(matrix);
 
+  const colors = ["red", "green", "blue", "purple"];
+  console.log(getRandomArrayElement(colors));
 
-function App() 
-{
-  // const flexColumn: React.CSSProperties = { display: "flex", flexDirection: "column" }
-  // const flexRow: React.CSSProperties = {
-  //   display: "flex", flexDirection: "row",
-  //   justifyContent: "space-around", width: "50vw", marginTop: "4vh"
-  // }
-
-  const properties: React.CSSProperties = 
-  {
-    display: "flex",
-    flexWrap: "wrap"
-  }
-
-  const [cityCountry, setCityCountry] = React.useState<string[]>([]);
-
-  function creatingDivs(value: string): string 
-  {
-    const cityOrCountry: string[] = value.split("#");
-    setCityCountry(cityOrCountry.slice());
-    return ''
-  }
-
-  function getDivs(cityCountry: string[]): JSX.Element[] 
-  {
-    console.log(cityCountry);
-    return cityCountry.map(value => <Timer cityOrCountry={value}></Timer>)
-  }
-
-  return <section style={{ display: "flex", flexDirection: "column"}}>
-    <Input placeHolder={'enter cities or countries separated by #'} inputProcess={creatingDivs} ></Input>
-    <section style={properties}>
-      {getDivs(cityCountry)}
-    </section>
-  </section >
-
+  const date = getRandomDate(2000, 2023);
+  console.log(date);
+  return <div></div>;
 }
-
-/*<div style={flexColumn}>
-  <div style={flexRow}>
-    <Timer cityOrCountry={"Paris"} inputId={"id-1"}></Timer>
-    <Timer cityOrCountry={"Prague"} inputId={"id-2"}></Timer>
-  </div>
-  <div style={flexRow}>
-    <Timer cityOrCountry={"Netanya"} inputId={"id-3"}></Timer>
-    <Timer cityOrCountry={"Moscow"} inputId={"id-4"}></Timer>
-  </div>
-</div>
-}*/
-
 export default App;
