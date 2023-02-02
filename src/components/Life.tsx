@@ -6,7 +6,7 @@ type Props = {
     dimensions: number;
     ticInterval: number;
 }
-export const Life: React.FC<Props> = ({dimensions, ticInterval}) => {
+export const Life: React.FC<Props> = ({ dimensions, ticInterval }) => {
     const lifeMatrix = React.useRef<LifeMatrix>();
     const [numbers, setNumbers] = React.useState<number[][]>([]);
     function tic() {
