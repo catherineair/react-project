@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Navigator } from './navigators/Navigator';
+import { Navigator } from './components/navigators/Navigator';
 import './App.css'
 
 import { layoutConfig } from './config/layout-config';
-import { Employees } from './pages/Employees';
-import { AddEmployee } from './pages/AddEmployee';
-import { AgeStatistics } from './pages/AgeStatistics';
-import { SalaryStatistics } from './pages/SalaryStatistics';
+import { Employees } from './components/pages/Employees';
+import { AddEmployee } from './components/pages/AddEmployee';
+import { AgeStatistics } from './components/pages/AgeStatistics';
+import { SalaryStatistics } from './components/pages/SalaryStatistics';
 
 
 function App() {

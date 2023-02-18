@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Box, Button } from "@mui/material";
 import { useDispatch } from 'react-redux';
-import { employeesActions } from '../redux/employees-slice';
+import { employeesActions } from '../../redux/employees-slice';
 import { createRandomEmployee } from '../../service/EmployeesService';
 
 export const AddEmployee: React.FC = () => {

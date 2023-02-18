@@ -1,8 +1,9 @@
 import { Link, Outlet } from "react-router-dom";
-import { NavigatorProps } from "../model/NavigatorProps"
-import './navigators.css'
+import { NavigatorProps } from "../../model/NavigatorProps"
+import '../navigators/navigators.css'
 import { Box, AppBar, Tabs, Tab } from "@mui/material"
 import React from "react";
+
 export const Navigator: React.FC<NavigatorProps> = ({ className, routes }) => {
     const [tabNumber, setTabNumber] = React.useState(0);
     function changeTabNumber(event: any, newNumber: number) {
