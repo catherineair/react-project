@@ -1,30 +1,27 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import { Navigator } from './navigators/Navigator';
 import './App.css'
-import { Navigator } from './components/navigators/Navigator';
-import { BreadProducts } from './components/pages/BreadProducts';
-import { Customers } from './components/pages/Customers';
-import { DairyProducts } from './components/pages/DairyProducts';
-import { Home } from './components/pages/Home';
-import { Orders } from './components/pages/Orders';
-import { layoutConfig } from './models/layout-config';
-import { productsConfig } from './models/products-config';
+
+import { layoutConfig } from './config/layout-config';
+import { Employees } from './pages/Employees';
+import { AddEmployee } from './pages/AddEmployee';
+import { AgeStatistics } from './pages/AgeStatistics';
+import { SalaryStatistics } from './pages/SalaryStatistics';
+
 
 function App() {
-
   return <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Navigator navigatorProps={layoutConfig} />}>
-        <Route index element={<Home />} />
-        <Route path='customers' element={<Customers />} />
-        <Route path='orders' element={<Orders />} />
-        <Route path='products' element={<Navigator navigatorProps={productsConfig} />}>
-          <Route path='dairy' element={<DairyProducts />} />
-          <Route path='bread' element={<BreadProducts />} />
-        </Route>
-      </Route>
-    </Routes>
+      <Routes>
+          <Route path='/' element={<Navigator className={layoutConfig.className}
+           routes={layoutConfig.routes}  />}>
+              <Route index element={<Employees/>}/>
+              <Route path='add' element={<AddEmployee/>}/>
+              <Route path='statistics/age' element={<AgeStatistics/>}/>
+              <Route path='statistics/salary' element={<SalaryStatistics/>}/>
+              
+          </Route>
+              
+      </Routes>
   </BrowserRouter>
 
 }
