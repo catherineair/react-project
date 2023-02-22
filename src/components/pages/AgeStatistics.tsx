@@ -5,7 +5,7 @@ import { Statistics } from '../Statistics';
 export const AgeStatistics: React.FC = () => {
     const employees: Employee[] = useSelector<any, Employee[]>(state => state.company.employees)
     const employeesAge = employees.map(empl => ({
-        age: new Date().getFullYear() - new Date(empl.birthDate).getFullYear()
+        ...empl, age: new Date().getFullYear() - new Date(empl.birthDate).getFullYear()
     }))
     return <Statistics title="Age Statistics" field="age" objects={employeesAge} />
 }
